@@ -30,7 +30,7 @@ fn main() {
             Ordering::Greater => println!("Too big!"),
             Ordering::Equal => {
                 println!("You win!");
-                println!("You guessed the number on the {} times try.", count);
+                println!("You guessed the number on the {} times attempts.", count);
                 break;
             }
         }
