@@ -1,15 +1,23 @@
 use std::collections::HashMap;
 use std::io;
 
-fn fibonacci(x: u64, memo: &mut HashMap<u64, u64>) -> u64 {
-    return match memo.get(&x) {
-        None => {
-            let n = fibonacci(x - 2, memo) + fibonacci(x - 1, memo);
-            memo.insert(x, n);
-            n
-        }
-        _ => memo[&x],
-    };
+fn fibonacci(x: u64) -> u64 {
+    let mut memo: HashMap<u64, u64> = HashMap::new();
+    memo.insert(0, 0);
+    memo.insert(1, 1);
+
+    fn fib(x: u64, memo: &mut HashMap<u64, u64>) -> u64 {
+        return match memo.get(&x) {
+            None => {
+                let n = fib(x - 2, memo) + fib(x - 1, memo);
+                memo.insert(x, n);
+                n
+            }
+            _ => memo[&x],
+        };
+    }
+
+    fib(x, &mut memo)
 }
 
 fn main() {
@@ -27,10 +35,7 @@ fn main() {
             }
         };
 
-        let mut memo: HashMap<u64, u64> = HashMap::new();
-        memo.insert(0, 0);
-        memo.insert(1, 1);
-        println!("The {}th Fibonacci number is {}", num, fibonacci(num, &mut memo));
+        println!("The {}th Fibonacci number is {}", num, fibonacci(num));
         break;
     }
 }
