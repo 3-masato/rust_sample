@@ -10,8 +10,17 @@ fn fizzbuzz_basic(x: u32) -> String {
     }
 }
 
+fn fizzbuzz_match(x: u32) -> String {
+    return match (x % 3, x % 5) {
+        (0, 0) => "FizzBuzz".into(),
+        (0, _) => "Fizz".into(),
+        (_, 0) => "Buzz".into(),
+        (_, _) => x.to_string(),
+    };
+}
+
 fn main() {
     for x in 1..=100 {
-        println!("{}: {}", x, fizzbuzz_basic(x));
+        println!("{}: {}, {}", x, fizzbuzz_basic(x), fizzbuzz_match(x));
     }
 }
